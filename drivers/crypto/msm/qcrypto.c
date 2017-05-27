@@ -23,6 +23,7 @@
 #include <linux/rtnetlink.h>
 #include <linux/interrupt.h>
 #include <linux/spinlock.h>
+#include <linux/llist.h>
 #include <linux/debugfs.h>
 #include <linux/workqueue.h>
 #include <linux/sched.h>
@@ -1835,8 +1836,7 @@ static int _qcrypto_process_aead(struct  crypto_engine *pengine,
 
 	return ret;
 }
-#define list_next_entry(pos, member) \
-		list_entry(pos->member.next, typeof(*pos), member)
+
 static struct crypto_engine *_qcrypto_static_assign_engine(
 					struct crypto_priv *cp)
 {
